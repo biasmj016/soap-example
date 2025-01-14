@@ -1,0 +1,8 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns="http://localhost:8080/soap">
+    <soapenv:Header/>
+    <soapenv:Body>
+        <ns:getUserResponse>
+            <ns:message>Hello, TestUser!</ns:message>
+        </ns:getUserResponse>
+    </soapenv:Body>
+</soapenv:Envelope>
