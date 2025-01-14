@@ -18,11 +18,26 @@ repositories {
 }
 
 dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter'
+    implementation 'org.springframework.boot:spring-boot-starter-web-services'
+    implementation 'wsdl4j:wsdl4j'
+    implementation 'javax.xml.bind:jaxb-api:2.3.1'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    testImplementation 'org.springframework.ws:spring-ws-test'
 }
 
 tasks.named('test') {
     useJUnitPlatform()
 }
+
+tasks.register('generateJaxbSources', JavaExec) {
+    mainClass = 'org.codehaus.mojo.plugins.jaxb2.mojos.XJC'
+    classpath = sourceSets.main.runtimeClasspath
+    args = [
+            '-d', 'src/main/java',
+            '-p', 'com.soap.example',
+            'src/main/resources/user.xsd'
+    ]
+}
+
+
+build.dependsOn generateJaxbSources
